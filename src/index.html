@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  </head>
+
+  <body>
+    <!--
+      Change the "client-id" query parameter value below to your sandbox client ID for testing.
+      You can change it to your live client ID once you're ready for production.
+      You can find your sandbox client ID here: https://developer.paypal.com/developer/applications
+      You can click "Sandbox", then click "Create App", then click on the app to get the client ID
+      and paste it here as the query parameter.
+    -->
+    <script src="https://www.paypal.com/sdk/js?client-id=PAYPAL-SANDBOX-CLIENT-ID"></script>
+
+    <div id="paypal-button-container"></div>
+
+    <script>
+      /*
+      // The commented code below shows you an example of how you could possibly
+      // keep track of the totalOrderValueString and you can update it every time
+      // a value gets added or removed from the product cart on your website.
+
+      const productsInCart = [
+        { name: 'T-shirt', valueInCents: 1299, quantity: 2 },
+        { name: 'Pants', valueInCents: 2599, quantity: 1 }
+      ];
+
+      function getTotalOrderValueString(cart) {
+        let totalCents = 0;
+        for (const { valueInCents, quantity } of cart) {
+          totalCents += valueInCents * quantity;
+        }
+        return String(totalCents / 100);
+      }
+
+      let totalOrderValueString = getTotalOrderValueString(productsInCart);
+      */
+
+      // You can use a variable to hold the total order value of the cart
+      // and update it every time your cart changes.
+      let totalOrderValueString = '1.99';
+
+      paypal
+        .Buttons({
+          createOrder: (data, actions) => {
+            console.log('createOrder', { data, actions });
+            return actions.order.create({
+              purchase_units: [
+                {
+                  amount: {
+                    value: totalOrderValueString
+                  }
+                }
+              ]
+            });
+          },
+          onApprove: (data, actions) => {
+            return actions.order.capture().then(details => {
+              console.log('onApprove', { details });
+              return fetch('/paypal-transaction-complete', {
+                method: 'post',
+                headers: {
+                  'content-type': 'application/json'
+                },
+                body: JSON.stringify({
+                  orderID: data.orderID
+                })
+              });
+            });
+          }
+        })
+        .render('#paypal-button-container');
+    </script>
+  </body>
+</html>
