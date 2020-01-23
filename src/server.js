@@ -12,5 +12,5 @@ app.post('/paypal-transaction-complete', handlePaypalRequest);
 
 const port = process.env.PORT || 3545;
 app.listen(port, () => {
-  console.log(`Listening on port ${port}`);
+  console.log(`Go to http://localhost:${port} in your web browser`);
 });
