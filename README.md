@@ -4,8 +4,8 @@ A simple working end-to-end PayPal checkout example
 ## Follow these steps to get everything working
 - Make sure you have git installed and run the following commands in your terminal:
 ```
-git clone git@github.paypal.com:BRJENNINGS/checkout-example.git
-cd checkout-example
+git clone https://github.com/paypal/paypal-checkout-example.git
+cd paypal-checkout-example
 ```
 - Open up checkout-example in your favorite text editor (like VSCode https://code.visualstudio.com/)
 - Find/replace all instances of "PAYPAL-SANDBOX-CLIENT-ID" with your sandbox client ID found here when you create and view your app here: https://developer.paypal.com/developer/applications/
