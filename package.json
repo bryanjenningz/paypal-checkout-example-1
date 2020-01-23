@@ -1,0 +1,15 @@
+{
+  "name": "checkout-example",
+  "version": "1.0.0",
+  "description": "A simple end-to-end working PayPal checkout example",
+  "main": "src/server.js",
+  "scripts": {
+    "dev": "nodemon src/server.js"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@paypal/checkout-server-sdk": "^1.0.2",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.2"
+  }
+}
