@@ -27,9 +27,3 @@ module Samples
     end
   end
 end
-
-# This driver function invokes the get_order function
-# with order ID to retrieve sample order details.
-# if __FILE__ == $0
-#   Samples::GetOrder::new::get_order('REPLACE-WITH-VALID-ORDER-ID')
-# end
